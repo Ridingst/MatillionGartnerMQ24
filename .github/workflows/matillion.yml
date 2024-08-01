@@ -57,9 +57,9 @@ jobs:
           echo "DONE - SUCCESS"
 
       - name: Update Status
-        #run: gh issue comment "$NUMBER" --body "$BODY"
+        #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
-          gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
+          gh issue comment "$NUMBER" --body "$(cat <<EOF
           ### Validation Status: ✅
           
           **Project: Marketing Leads**
