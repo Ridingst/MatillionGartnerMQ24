@@ -76,6 +76,7 @@ jobs:
       - name: Post Schedule Status
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
+          gh issue list --json number --limit 50 | jq '. | max_by(.number)'
           sleep 5
           number=$(gh pr list -s all --limit 1 | awk '{print $1}' | cut -c 1-)
           gh issue comment $number --body "$(cat <<EOF
