@@ -64,10 +64,17 @@ jobs:
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           BODY: >
-            # Validation Status: ✅
+            # Project: Marketing Leads
+            ## Validation Status: ✅
             
-            Project: Marketing Leads
-            
+      - name: Update Status
+        #run: gh issue comment "$NUMBER" --body "$BODY"
+        run: gh issue comment 1 --body "$BODY"
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          BODY: >
             | Pipeline Name                   | Orch/Trans     | Validation Status |
             |---------------------------------|----------------|-------------------|
             | Marketing Leads/Leads 2024      | Orchestration  | ✅                 |
