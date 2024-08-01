@@ -72,9 +72,10 @@ jobs:
           app-id: ${{ vars.CLIENT }}
           private-key: ${{ secrets.TOKEN }}
 
-      - name: Post Publish Status
+      - name: Post Schedule Status
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
+          gh issue list --json number --limit 50 | jq '. | max_by(.number)'
           sleep 5
           gh issue comment 19 --body "$(cat <<EOF
           ## Data Productivity Cloud: Schedule
