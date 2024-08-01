@@ -61,19 +61,14 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
-          # NUMBER: ${{ github.event.issue.number }}
-          NUMBER: 1
+          NUMBER: ${{ github.event.issue.number }}
           BODY: >
-            This issue is available for anyone to work on.
-            **Make sure to reference this issue in your pull request.**
-            :sparkles: Thank you for your contribution! :sparkles:
+            # Validation Status: ✅
+
+            Project: Marketing Leads
+
+            | Pipeline Name                   | Orch/Trans     | Validation Status |
+            |---------------------------------|----------------|-------------------|
+            | Marketing Leads/Leads 2024      | Orchestration  | ✅                 |
+            | Marketing Leads/Leads 2024 Prep | Transformation | ✅                 |
             
-      - name: Create Comment on Pull Request
-        uses: peter-evans/create-or-update-comment@v1
-        with: 
-          token: ${{ steps.generate-token.outputs.token }}
-          issue-number: 1
-          body: |
-            ![Matillion Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdyxtoD5xUt8Y3E2_sebYuIs_lXbtkMh-qPw&s)
-            The Matillion pipeline has been validated and run in test mode with outcome: SUCCESS.
-            Would you like to publish the new pipeline and update existing schedules? Please reply with `@matillion-bot publish` to confirm.
