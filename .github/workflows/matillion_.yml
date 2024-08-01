@@ -15,7 +15,6 @@ on:
 jobs:
   # This workflow contains a single job called "validate"
   Publish:
-    needs: Test
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -35,7 +34,7 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           sleep 4
-          gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
+          gh issue comment 15 --body "$(cat <<EOF
           ## Data Productivity Cloud: Publish
           🎉 3 Pipelines have been published to [**Production**] environment 🎉 \
 
@@ -57,7 +56,6 @@ jobs:
           GH_REPO: ${{ github.repository }}
 
   Scheudle:
-    needs: Publish
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -77,7 +75,7 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           sleep 3
-          gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
+          gh issue comment 15 --body "$(cat <<EOF
           ## Data Productivity Cloud: Publish
           🎉 Yay! I've created a new schedule for **Marketing Leads/Leads 2024** to run **Daily**  🎉 \
           
