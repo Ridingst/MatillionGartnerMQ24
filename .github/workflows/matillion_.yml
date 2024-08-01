@@ -75,9 +75,9 @@ jobs:
       - name: Post Publish Status
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
-          sleep 3
+          sleep 5
           gh issue comment 15 --body "$(cat <<EOF
-          ## Data Productivity Cloud: Publish
+          ## Data Productivity Cloud: Schedule
           🎉 Yay! I've created a new schedule for **Marketing Leads/Leads 2024** to run **Daily**  🎉 \
           
           EOF
