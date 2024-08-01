@@ -73,4 +73,4 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.issue.number }}
+          NUMBER: 1 #${{ github.event.issue.number }}
