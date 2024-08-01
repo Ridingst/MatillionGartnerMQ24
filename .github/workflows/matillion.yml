@@ -65,9 +65,9 @@ jobs:
           NUMBER: ${{ github.event.issue.number }}
           BODY: >
             # Validation Status: ✅
-
+            
             Project: Marketing Leads
-
+            
             | Pipeline Name                   | Orch/Trans     | Validation Status |
             |---------------------------------|----------------|-------------------|
             | Marketing Leads/Leads 2024      | Orchestration  | ✅                 |
