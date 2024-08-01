@@ -74,9 +74,11 @@ jobs:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
-          BODY: >
-            | Pipeline Name                   | Orch/Trans     | Validation Status |
-            |---------------------------------|----------------|-------------------|
-            | Marketing Leads/Leads 2024      | Orchestration  | ✅                 |
-            | Marketing Leads/Leads 2024 Prep | Transformation | ✅                 |
-            
+          BODY: >|
+            ### Validation Status: ✅ $'\r\n'
+            **Project: Marketing Leads** $'\r\n'
+            $'\r\n'
+            | Pipeline Name                   | Orch/Trans     | Validation Status |$'\r\n'
+            |---------------------------------|----------------|-------------------|$'\r\n'
+            | Marketing Leads/Leads 2024      | Orchestration  | ✅                 |$'\r\n'
+            | Marketing Leads/Leads 2024 Prep | Transformation | ✅                 |$'\r\n'
