@@ -30,7 +30,14 @@ jobs:
         run: |
           echo ${bold}Validating Pipelines...
           echo Identifying new or updated pipelines
-          sleep(2) #
+          echo (1) New Orchestration Pipeline and (1) New Transformation Pipeline identified;
+          echo     [ORCH] Marketing Leads/Leads 2024
+          echo     [TRANS] Marketing Leads/Leads 2024 Prep
+      - name: Sleep for 3 minutes
+        run: sleep 10s
+        shell: bash
+      - name: Run a one-line script
+        run: |
           echo (1) New Orchestration Pipeline and (1) New Transformation Pipeline identified;
           echo     [ORCH] Marketing Leads/Leads 2024
           echo     [TRANS] Marketing Leads/Leads 2024 Prep
