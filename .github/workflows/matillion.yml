@@ -46,10 +46,7 @@ jobs:
             
       - name: Create Comment on Pull Request
         if: github.event_name == 'pull_request'
-        uses: peter-evans/create-or-update-comment@v1
-        with: 
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            The Matillion pipeline has been validated and run in test mode with outcome: SUCCESS.
-            Would you like to publish the new pipeline and update existing schedules? Please reply with `@matillion-bot publish` to confirm.
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            Hello world ! :wave:
