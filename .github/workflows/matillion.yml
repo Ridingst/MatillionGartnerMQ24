@@ -99,7 +99,7 @@ jobs:
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
           ## Testing
-          🎉 All Test have run successfully 🎉 
+          🎉 All tests have passed 🎉 
           Project: **Marketing Leads**
           Pipelines Tested: 100% (2/2) **PASS**
           Test Scenarios: 100% (4/4) **PASS**
