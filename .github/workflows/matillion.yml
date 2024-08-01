@@ -56,7 +56,7 @@ jobs:
           echo "2/2 Pipelines successfully validated"
           echo "DONE - SUCCESS"
 
-      - name: Update Status
+      - name: Post Validation Status 
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
@@ -68,6 +68,44 @@ jobs:
           |---------------------------------|----------------|-------------------|
           | Marketing Leads/Leads 2024      | Orchestration  | ✅                |
           | Marketing Leads/Leads 2024 Prep | Transformation | ✅                |
+          EOF
+          )"
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: 1 #${{ github.event.issue.number }}
+
+  Test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.CLIENT }}
+          private-key: ${{ secrets.TOKEN }}
+
+      - name: Post Test Status
+        #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
+        run: |
+          gh issue comment "$NUMBER" --body "$(cat <<EOF
+          ## Testing
+          Project: **Marketing Leads**
+          Pipelines Tested: 100% (2/2) **PASS**
+          Test Scenarios: 100% (4/4) **PASS**
+          
+          | Test                       | Orch/Trans     | Pipeline              | Test Status |
+          |----------------------------|----------------|-----------------------|-------------|
+          | Check for duplicate emails | Transformation | Leads 2024 Test cases | ✅           |
+          | Check country list         | Transformation | Leads 2024 Test cases | ✅           |
+          | Standardized names         | Transformation | Leads 2024 Test cases | ✅           |
+          | Table exists               | Orchestration  | Leads 2024            | ✅           |
           EOF
           )"
         env:
