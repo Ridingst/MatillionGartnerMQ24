@@ -60,9 +60,9 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
-          ### Validation Status: ✅ 2/2 PASS
-          
           **Project: Marketing Leads**
+          ### Validation Status: ✅ 
+          2/2 PIPELINES SUCCESSFULLY VALIDATED
           
           | Pipeline Name                   | Orch/Trans     | Validation Status |
           |---------------------------------|----------------|-------------------|
