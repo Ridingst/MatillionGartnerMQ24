@@ -61,10 +61,10 @@ jobs:
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
           ## Validation
-          🎉 All Pipelines have validated successfully 🎉
+          🎉 All Pipelines have validated successfully 🎉\
           
           Project: **Marketing Leads**
-          Validation Status: 100% (2/2) **PASS**
+          Validation Status: 100% (2/2) **PASS**\
           
           | Pipeline Name                   | Orch/Trans     | Validation Status |
           |---------------------------------|----------------|-------------------|
@@ -99,10 +99,10 @@ jobs:
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
           ## Testing
-          🎉 All tests have passed 🎉 
+          🎉 All tests have passed 🎉 \
           Project: **Marketing Leads**
           Pipelines Tested: 100% (2/2) **PASS**
-          Test Scenarios: 100% (4/4) **PASS**
+          Test Scenarios: 100% (4/4) **PASS**\
           
           | Test                       | Orch/Trans     | Pipeline              | Test Status |
           |----------------------------|----------------|-----------------------|-------------|
