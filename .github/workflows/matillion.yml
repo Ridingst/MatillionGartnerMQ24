@@ -58,22 +58,19 @@ jobs:
 
       - name: Update Status
         #run: gh issue comment "$NUMBER" --body "$BODY"
-        run:|
-          gh issue comment 1 --body "$(cat <<EOF
-        ### Validation Status: ✅
-        
-        **Project: Marketing Leads**
-        
-        | Pipeline Name                   | Orch/Trans     | Validation Status |
-        |---------------------------------|----------------|-------------------|
-        | Marketing Leads/Leads 2024      | Orchestration  | ✅                |
-        | Marketing Leads/Leads 2024 Prep | Transformation | ✅                |
-        EOF
-            )"
+        run: |
+          gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
+          ### Validation Status: ✅
+          
+          **Project: Marketing Leads**
+          
+          | Pipeline Name                   | Orch/Trans     | Validation Status |
+          |---------------------------------|----------------|-------------------|
+          | Marketing Leads/Leads 2024      | Orchestration  | ✅                |
+          | Marketing Leads/Leads 2024 Prep | Transformation | ✅                |
+          EOF
+          )"
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
-          BODY: >
-            # Project: Marketing Leads
-            ## Validation Status: ✅
