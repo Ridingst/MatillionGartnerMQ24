@@ -43,4 +43,14 @@ jobs:
           echo "Validating Pipelines 2/2: [TRANS] Marketing Leads/Leads 2024 Prep - SUCCESS"
           echo "2/2 Pipelines successfully validated"
           echo "DONE - SUCCESS"
-          
+            
+      - name: Create Comment on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v1
+        with: 
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ![Matillion Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdyxtoD5xUt8Y3E2_sebYuIs_lXbtkMh-qPw&s)
+            The Matillion pipeline has been validated and run in test mode with outcome: SUCCESS.
+            Would you like to publish the new pipeline and update existing schedules? Please reply with `@matillion-bot publish` to confirm.
