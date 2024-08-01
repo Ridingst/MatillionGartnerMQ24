@@ -60,7 +60,7 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
-          ## Validation
+          ## Data Productivity Cloud: Validation
           🎉 All Pipelines have validated successfully 🎉\
             
           
@@ -99,7 +99,7 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
-          ## Testing
+          ## Data Productivity Cloud: Testing
           🎉 All tests have passed 🎉 \
 
           
