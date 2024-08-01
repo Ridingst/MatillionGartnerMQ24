@@ -25,6 +25,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.CLIENT }}
+          private-key: ${{ secrets.TOKEN }}
+
+      - name: Use the token
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: |
+          gh api octocat
+
       # Runs a single command using the runners shell
       - name: Validate
         run: |
@@ -58,7 +71,7 @@ jobs:
       - name: Create Comment on Pull Request
         uses: peter-evans/create-or-update-comment@v1
         with: 
-          token: ${{ secrets.TOKEN }}
+          token: ${{ steps.generate-token.outputs.token }}
           issue-number: 1
           body: |
             ![Matillion Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdyxtoD5xUt8Y3E2_sebYuIs_lXbtkMh-qPw&s)
