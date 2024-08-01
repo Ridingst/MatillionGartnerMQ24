@@ -145,15 +145,15 @@ design:
     Check for duplicate emails:
       position:
         x: 770
-        "y": 360
+        "y": 560
       tempMetlId: 6
     Check country list for US/UK:
       position:
         x: 960
-        "y": 360
+        "y": 560
       tempMetlId: 7
     Check for non-standardized names:
       position:
         x: 1170
-        "y": 370
+        "y": 570
       tempMetlId: 8
