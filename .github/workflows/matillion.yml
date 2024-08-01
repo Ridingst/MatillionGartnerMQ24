@@ -29,7 +29,7 @@ jobs:
       - name: Run a one-line script
         run: |
           echo ${bold}Validating Pipelines...
-          ehco Identifying new or updated pipelines
+          echo Identifying new or updated pipelines
           sleep 2
           echo (1) New Orchestration Pipeline and (1) New Transformation Pipeline identified;
           echo     [ORCH] Marketing Leads/Leads 2024
