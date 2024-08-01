@@ -147,10 +147,12 @@ jobs:
           ## Data Productivity Cloud: Publish
           🎉 3 Pipelines have been published to [**Production**] environment 🎉 \
 
+          
           Published Pipelines;
-            [1]    Marketing Leads/Leads 2024
-            [2]    Marketing Leads/Leads 2024 Prep
-
+            * [1]    Marketing Leads/Leads 2024
+            * [2]    Marketing Leads/Leads 2024 Prep
+          
+          
           ❓ _tip_ ❓
           I can automatically update any existing schedules to execute using the latest version, just reply with `@matillion-dpc schedule update`.
           Alternatively you can create a new schedule by replying `@matillion-dpc [pipeline id] [frequency or cron expression]`
