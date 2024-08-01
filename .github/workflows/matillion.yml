@@ -57,7 +57,7 @@ jobs:
       - name: Post Validation Status 
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
-          gh issue comment "${{ github.event.number }}" --body "$(cat <<EOF
+          gh issue comment "${{ github.event.issue.number }}" --body "$(cat <<EOF
           ## Data Productivity Cloud: Validation
           🎉 All Pipelines have validated successfully 🎉\
             
@@ -74,7 +74,6 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.issue.number }}
 
   Test:
     needs: Validate
@@ -96,7 +95,7 @@ jobs:
       - name: Post Test Status
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
-          gh issue comment "$NUMBER" --body "$(cat <<EOF
+          gh issue comment "${{ github.event.issue.number }}" --body "$(cat <<EOF
           ## Data Productivity Cloud: Testing
           🎉 All tests have passed 🎉 \
 
@@ -116,4 +115,3 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.issue.number }}
