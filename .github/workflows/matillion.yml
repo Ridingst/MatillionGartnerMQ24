@@ -57,7 +57,8 @@ jobs:
           echo "DONE - SUCCESS"
 
       - name: Update Status
-        run: gh issue comment "$NUMBER" --body "$BODY"
+        #run: gh issue comment "$NUMBER" --body "$BODY"
+        run: gh issue comment 1 --body "$BODY"
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
