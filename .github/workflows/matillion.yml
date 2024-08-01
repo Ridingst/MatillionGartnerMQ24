@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Validate
         run: |
           echo ${bold}Validating Pipelines...
           echo Identifying new or updated pipelines
@@ -34,11 +34,14 @@ jobs:
           echo "(1) New Orchestration Pipeline and (1) New Transformation Pipeline identified;"
           echo "    [ORCH] Marketing Leads/Leads 2024"
           echo "    [TRANS] Marketing Leads/Leads 2024 Prep"
-      - name: Sleep for 3 minutes
-        run: sleep 10s
-        shell: bash
-      - name: Run a one-line script
-        run: |
-          echo (1) New Orchestration Pipeline and (1) New Transformation Pipeline identified;
-          echo     [ORCH] Marketing Leads/Leads 2024
-          echo     [TRANS] Marketing Leads/Leads 2024 Prep
+          echo ""
+          echo ""
+          echo -ne "Validating Pipelines 1/2: [ORCH] Marketing Leads/Leads 2024 "
+          sleep 0.5
+          echo -ne "."
+          sleep 0.2
+          echo -ne "."
+          sleep 0.2
+          echo -ne "."
+          echo "    [DONE] SUCCESS"
+          
