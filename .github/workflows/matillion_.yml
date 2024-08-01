@@ -34,7 +34,7 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           sleep 4
-          gh issue comment 18 --body "$(cat <<EOF
+          gh issue comment 19 --body "$(cat <<EOF
           ## Data Productivity Cloud: Publish
           🎉 3 Pipelines have been published to [**Production**] environment 🎉 \
 
@@ -76,7 +76,7 @@ jobs:
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
           sleep 5
-          gh issue comment 18 --body "$(cat <<EOF
+          gh issue comment 19 --body "$(cat <<EOF
           ## Data Productivity Cloud: Schedule
           🎉 Yay! I've created a new schedule for **Marketing Leads/Leads 2024** to run **Daily**  🎉 \
           
