@@ -35,7 +35,7 @@ jobs:
         run: |
           sleep 4
           number=$(gh pr list -s all --limit 1 | awk '{print $1}' | cut -c 1-)
-          gh issue comment $number --body "$(cat <<EOF
+          gh pr comment $number --body "$(cat <<EOF
           ## Data Productivity Cloud: Publish
           🎉 3 Pipelines have been published to [**Production**] environment 🎉 \
 
@@ -76,10 +76,9 @@ jobs:
       - name: Post Schedule Status
         #gh issue comment ${{ github.event.number }} --body "$(cat <<EOF
         run: |
-          gh issue list --json number --limit 50 | jq '. | max_by(.number)'
           sleep 5
           number=$(gh pr list -s all --limit 1 | awk '{print $1}' | cut -c 1-)
-          gh issue comment $number --body "$(cat <<EOF
+          gh pr comment $number --body "$(cat <<EOF
           ## Data Productivity Cloud: Schedule
           🎉 Yay! I've created a new schedule for **Marketing Leads/Leads 2024** to run **Daily**  🎉 \
           
