@@ -1,0 +1,159 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    Raw marketing leads:
+      type: "table-input"
+      parameters:
+        componentName: "Raw marketing leads"
+        database: "[Environment Default]"
+        schema: "GARTNER_MQ_2024"
+        targetTable: "s_marketing_lead"
+        columnNames:
+        - "Company Name"
+        - "Country"
+        - "Date of Inquiry"
+        - "Email Address"
+        - "First Name"
+        - "id"
+        - "Interested Products"
+        - "Job Title"
+        - "Last Name"
+        - "Lead ID"
+        - "Lead Score"
+        - "Phone Number"
+        - "Source"
+        timeOffset:
+    deduplicate emails:
+      type: "distinct"
+      sources:
+      - "Raw marketing leads"
+      parameters:
+        componentName: "deduplicate emails"
+        columns:
+        - "Email Address"
+        - "Company Name"
+        - "Country"
+        - "Date of Inquiry"
+        - "First Name"
+        - "id"
+        - "Interested Products"
+        - "Job Title"
+        - "Last Name"
+        - "Lead ID"
+        - "Lead Score"
+        - "Phone Number"
+        - "Source"
+    Remove non-core countries:
+      type: "filter"
+      sources:
+      - "Check for duplicate emails"
+      parameters:
+        componentName: "Remove non-core countries"
+        filterConditions:
+        - - "Country"
+          - "Is"
+          - "Equal to"
+          - "US"
+        - - "Country"
+          - "Is"
+          - "Equal to"
+          - "UK"
+        combineCondition: "Or"
+    Standardize names:
+      type: "calculator"
+      sources:
+      - "Check country list for US/UK"
+      parameters:
+        componentName: "Standardize names"
+        includeInputColumns: "Yes"
+        calculations:
+        - - |
+            TRIM(UPPER("Last Name"))
+          - "Last Name"
+    Prepared Marketing Leads:
+      type: "rewrite-table"
+      sources:
+      - "Check for non-standardized names"
+      parameters:
+        componentName: "Prepared Marketing Leads"
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "GARTNER_MQ_2024"
+        targetTable: "marketing_leads"
+        orderBy:
+    Check for duplicate emails:
+      type: "assert-view-sf"
+      sources:
+      - "deduplicate emails"
+      parameters:
+        componentName: "Check for duplicate emails"
+        metadata:
+        values:
+        ignoreMetadataOrder: "No"
+        rowCountComparisonType: "Greater Than or Equal To"
+        lowerValue: "1"
+    Check country list for US/UK:
+      type: "assert-view-sf"
+      sources:
+      - "Remove non-core countries"
+      parameters:
+        componentName: "Check country list for US/UK"
+        metadata:
+        values:
+        ignoreMetadataOrder: "No"
+        rowCountComparisonType: "Greater Than or Equal To"
+        lowerValue: "1"
+    Check for non-standardized names:
+      type: "assert-view-sf"
+      sources:
+      - "Standardize names"
+      parameters:
+        componentName: "Check for non-standardized names"
+        metadata:
+        values:
+        ignoreMetadataOrder: "No"
+        rowCountComparisonType: "Greater Than or Equal To"
+        lowerValue: "1"
+design:
+  components:
+    Raw marketing leads:
+      position:
+        x: 520
+        "y": 460
+      tempMetlId: 1
+    deduplicate emails:
+      position:
+        x: 670
+        "y": 460
+      tempMetlId: 2
+    Remove non-core countries:
+      position:
+        x: 870
+        "y": 460
+      tempMetlId: 3
+    Standardize names:
+      position:
+        x: 1060
+        "y": 460
+      tempMetlId: 4
+    Prepared Marketing Leads:
+      position:
+        x: 1280
+        "y": 460
+      tempMetlId: 5
+    Check for duplicate emails:
+      position:
+        x: 770
+        "y": 560
+      tempMetlId: 6
+    Check country list for US/UK:
+      position:
+        x: 960
+        "y": 560
+      tempMetlId: 7
+    Check for non-standardized names:
+      position:
+        x: 1170
+        "y": 570
+      tempMetlId: 8

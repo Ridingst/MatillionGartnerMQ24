@@ -1,0 +1,111 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    Raw marketing leads:
+      type: "table-input"
+      parameters:
+        componentName: "Raw marketing leads"
+        database: "[Environment Default]"
+        schema: "GARTNER_MQ_2024"
+        targetTable: "s_marketing_lead"
+        columnNames:
+        - "Company Name"
+        - "Country"
+        - "Date of Inquiry"
+        - "Email Address"
+        - "First Name"
+        - "id"
+        - "Interested Products"
+        - "Job Title"
+        - "Last Name"
+        - "Lead ID"
+        - "Lead Score"
+        - "Phone Number"
+        - "Source"
+        timeOffset:
+    deduplicate emails:
+      type: "distinct"
+      sources:
+      - "Raw marketing leads"
+      parameters:
+        componentName: "deduplicate emails"
+        columns:
+        - "Email Address"
+        - "Company Name"
+        - "Country"
+        - "Date of Inquiry"
+        - "First Name"
+        - "id"
+        - "Interested Products"
+        - "Job Title"
+        - "Last Name"
+        - "Lead ID"
+        - "Lead Score"
+        - "Phone Number"
+        - "Source"
+    Remove non-core countries:
+      type: "filter"
+      sources:
+      - "deduplicate emails"
+      parameters:
+        componentName: "Remove non-core countries"
+        filterConditions:
+        - - "Country"
+          - "Is"
+          - "Equal to"
+          - "US"
+        - - "Country"
+          - "Is"
+          - "Equal to"
+          - "UK"
+        combineCondition: "Or"
+    Standardize names:
+      type: "calculator"
+      sources:
+      - "Remove non-core countries"
+      parameters:
+        componentName: "Standardize names"
+        includeInputColumns: "Yes"
+        calculations:
+        - - |
+            TRIM(UPPER("Last Name"))
+          - "Last Name"
+    Prepared Marketing Leads:
+      type: "rewrite-table"
+      sources:
+      - "Standardize names"
+      parameters:
+        componentName: "Prepared Marketing Leads"
+        warehouse: "[Environment Default]"
+        database: "[Environment Default]"
+        schema: "GARTNER_MQ_2024"
+        targetTable: "marketing_leads"
+        orderBy:
+design:
+  components:
+    Raw marketing leads:
+      position:
+        x: 0
+        "y": 0
+      tempMetlId: 1
+    deduplicate emails:
+      position:
+        x: 150
+        "y": 0
+      tempMetlId: 2
+    Remove non-core countries:
+      position:
+        x: 290
+        "y": 0
+      tempMetlId: 3
+    Standardize names:
+      position:
+        x: 430
+        "y": 0
+      tempMetlId: 4
+    Prepared Marketing Leads:
+      position:
+        x: 560
+        "y": 0
+      tempMetlId: 6
