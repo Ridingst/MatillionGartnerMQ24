@@ -42,6 +42,18 @@ jobs:
           echo "Validating Pipelines 2/2: [TRANS] Marketing Leads/Leads 2024 Prep - SUCCESS"
           echo "2/2 Pipelines successfully validated"
           echo "DONE - SUCCESS"
+
+      - name: Update Status
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          # NUMBER: ${{ github.event.issue.number }}
+          NUMBER: 1
+          BODY: >
+            This issue is available for anyone to work on.
+            **Make sure to reference this issue in your pull request.**
+            :sparkles: Thank you for your contribution! :sparkles:
             
       - name: Create Comment on Pull Request
         uses: peter-evans/create-or-update-comment@v1
