@@ -59,7 +59,7 @@ jobs:
       - name: Update Status
         run: gh issue comment "$NUMBER" --body "$BODY"
         env:
-          GH_TOKEN: ${{ teps.generate-token.outputs.token }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
           # NUMBER: ${{ github.event.issue.number }}
           NUMBER: 1
