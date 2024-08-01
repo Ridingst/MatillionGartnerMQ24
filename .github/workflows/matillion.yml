@@ -61,7 +61,7 @@ jobs:
         run: |
           gh issue comment "$NUMBER" --body "$(cat <<EOF
           **Project: Marketing Leads**
-          **Validation Status: ✅**
+          **Validation Status: PASS**
           
           | Pipeline Name                   | Orch/Trans     | Validation Status |
           |---------------------------------|----------------|-------------------|
