@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "validate"
-  validate:
+  Validate:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -58,7 +58,18 @@ jobs:
 
       - name: Update Status
         #run: gh issue comment "$NUMBER" --body "$BODY"
-        run: gh issue comment 1 --body "$BODY"
+        run:|
+          gh issue comment 1 --body "$(cat <<EOF
+        ### Validation Status: ✅
+        
+        **Project: Marketing Leads**
+        
+        | Pipeline Name                   | Orch/Trans     | Validation Status |
+        |---------------------------------|----------------|-------------------|
+        | Marketing Leads/Leads 2024      | Orchestration  | ✅                |
+        | Marketing Leads/Leads 2024 Prep | Transformation | ✅                |
+        EOF
+            )"
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           GH_REPO: ${{ github.repository }}
@@ -66,19 +77,3 @@ jobs:
           BODY: >
             # Project: Marketing Leads
             ## Validation Status: ✅
-            
-      - name: Update Status
-        #run: gh issue comment "$NUMBER" --body "$BODY"
-        run: gh issue comment 1 --body "$BODY"
-        env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-          GH_REPO: ${{ github.repository }}
-          NUMBER: ${{ github.event.issue.number }}
-          BODY: >
-            ### Validation Status: ✅ $'\r\n'
-            **Project: Marketing Leads** $'\r\n'
-            $'\r\n'
-            | Pipeline Name                   | Orch/Trans     | Validation Status |$'\r\n'
-            |---------------------------------|----------------|-------------------|$'\r\n'
-            | Marketing Leads/Leads 2024      | Orchestration  | ✅                 |$'\r\n'
-            | Marketing Leads/Leads 2024 Prep | Transformation | ✅                 |$'\r\n'
